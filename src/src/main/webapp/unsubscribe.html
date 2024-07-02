@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>Web Storage 사용자 탈퇴</title>
+<style>
+  input:valid {
+    border: 1px solid black;
+  }  
+  input:invalid {
+    border: 1px dashed red;
+  }
+  input:invalid:required {
+    background: lightblue;
+  }
+</style>
+<script type='text/javascript'>
+  function checkInput() {
+    let pwPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    let pw = document.loginForm.pw.value;
+	if (pw == '' || !pwPattern.test(pw)) {
+      alert('비밀번호는 숫자와 영문 대소문자를 포함하고, 8글자 이상이어야 합니다.');  
+	  document.loginForm.pw.select();
+	  return false;
+    }
+	
+    return true;
+  }
+</script>
+</head>
+<body>
+<div style='width:400px;' align='center'> 
+  <strong><ins>Delete web storage & Leave!</ins></strong><br><br>
+</div>
+
+<form action='unregisterUser.do' name='loginForm' method='post'>
+  <fieldset style='width:400px'>
+    <legend>계정 정보 (<strong style='color:red;'>*</strong>: 필수)</legend>
+
+    <label for='userid'><small>User ID:</small><strong style='color:red;'>*</strong></label><br>
+    <input type='email' name='userid' id='userid' placeholder='Enter Your Email' required><br>
+	
+    <label for='pw'><small>Password:</small><strong style='color:red;'>*</strong></label><br>
+    <input type='password' name='pw' id='pw' placeholder='Enter Password' size='15' minlength='8' maxlength='12' required><br><br>
+
+  </fieldset><br>
+   
+  <div style='width:400px;' align='center'> 
+    <input type='submit' value='Unregister' onclick='return checkInput()'> &nbsp;&nbsp;
+    <input type='reset' value='Clear'>
+  </div>   
+</form>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>Web Storage 사용자 등록</title>
+<style>
+  input:valid {
+    border: 1px solid black;
+  }  
+  input:invalid {
+    border: 1px dashed red;
+  }
+  input:invalid:required {
+    background: lightblue;
+  }
+</style>
+<script type='text/javascript'>
+  function checkInput() {
+    let pwPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    let pw = document.registerForm.pw.value;
+	if (pw == '' || !pwPattern.test(pw)) {
+      alert('비밀번호는 숫자와 영문 대소문자를 포함하고, 8글자 이상이어야 합니다.');  
+	  document.registerForm.pw.select();
+	  return false;
+    }
+	
+	let pw2 = document.registerForm.pw2.value;
+	if (pw !== pw2) {
+	  alert('두 비밀번호의 값이 일치하지 않습니다!');
+	  document.registerForm.pw2.select();
+	  return false;
+	}
+	
+    return true;
+  }
+</script>
+</head>
+<body>
+<div style='width:400px;' align='center'> 
+  <strong><ins>Create Your Web Storage, Now!</ins></strong><br><br>
+</div>
+
+<form action='registerUser.do' name='registerForm' method='post'>
+  <fieldset style='width:400px'>
+    <legend>계정 정보 (<strong style='color:red;'>*</strong>: 필수)</legend>
+
+    <label for='userid'><small>User ID:</small><strong style='color:red;'>*</strong></label><br>
+    <input type='email' name='userid' id='userid' placeholder='Enter Your Email' required><br><br>
+    
+    <label for='fullname'><small>Full Name:</small></label><br>
+    <input type='text' name='fullname' id='fullname' placeholder='Enter Your Name' size='40'><br>
+    
+	<label for='birthdate'><small>Date of Birth:</small></label>&nbsp;
+    <input type='date' name='birthdate' id='birthdate' min='1923-01-01' max='2030-04-12'><br><br>
+	
+    <label for='pw'><small>Password:</small><strong style='color:red;'>*</strong></label><br>
+    <input type='password' name='pw' id='pw' placeholder='Enter Password' size='15' minlength='8' maxlength='12' required><br>
+	
+    <label for='pw2'><small>Confirm Password:</small><strong style='color:red;'>*</strong></label><br>
+    <input type='password' name='pw2' id='pw2' placeholder='Repeat Password' size='15' minlength='8' maxlength='12' required><br>
+	
+  </fieldset><br>
+   
+  <div style='width:400px;' align='center'> 
+    <input type='submit' value='Send' onclick='return checkInput()'> &nbsp;&nbsp;
+    <input type='reset' value='Clear'>
+  </div>   
+</form>
+</body>
+</html>
